@@ -1,0 +1,312 @@
+.page {
+  min-height: calc(100vh - 130px);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Izbira kolesarja */
+.section {
+  padding: 20px 16px;
+}
+
+.sectionHeader {
+  margin-bottom: 20px;
+}
+
+.sectionHeader h1 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.sectionHeader p {
+  color: var(--text2);
+  font-size: 14px;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  color: var(--text2);
+}
+
+.searchBar input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.searchBar input::placeholder { color: var(--text3); }
+
+.kolsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kolsItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.kolsItem:active {
+  background: var(--surface2);
+  transform: scale(0.98);
+}
+
+.kolsNum {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--accent);
+  min-width: 40px;
+}
+
+.kolsInfo { flex: 1; }
+.kolsInfo strong { display: block; font-size: 15px; }
+.kolsInfo span { font-size: 12px; color: var(--text2); }
+
+.prazno {
+  text-align: center;
+  color: var(--text3);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+/* Scanner */
+.scanSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+}
+
+.kolesar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 30px;
+  font-size: 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+.kolesar span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.kolesar strong { font-weight: 600; }
+
+.spremeniBtn {
+  background: none;
+  color: var(--text3);
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  margin-left: 4px;
+}
+
+.scanContainer {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+
+.qrReader {
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* Override html5-qrcode styles */
+.qrReader :global(#qr-reader__scan_region) {
+  border-radius: var(--radius) !important;
+}
+
+.qrReader :global(video) {
+  border-radius: var(--radius) !important;
+  width: 100% !important;
+}
+
+.qrReader :global(img) { display: none !important; }
+.qrReader :global(#qr-reader__header_message) { display: none !important; }
+.qrReader :global(#qr-reader__status_span) { display: none !important; }
+.qrReader :global(select) { display: none !important; }
+.qrReader :global(button) { display: none !important; }
+
+.scanOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--accent);
+  border-style: solid;
+}
+
+.corner[data-pos="tl"] { top: 16px; left: 16px; border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
+.corner[data-pos="tr"] { top: 16px; right: 16px; border-width: 3px 3px 0 0; border-radius: 0 4px 0 0; }
+.corner[data-pos="bl"] { bottom: 16px; left: 16px; border-width: 0 0 3px 3px; border-radius: 0 0 0 4px; }
+.corner[data-pos="br"] { bottom: 16px; right: 16px; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
+
+.scanLine {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scanLine 2s linear infinite;
+  border-radius: 1px;
+}
+
+.navodila {
+  color: var(--text2);
+  font-size: 13px;
+  text-align: center;
+}
+
+.preverjanje {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text2);
+  font-size: 14px;
+  padding: 12px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  width: 100%;
+  justify-content: center;
+}
+
+/* Rezultat */
+.rezultat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+  gap: 20px;
+  animation: slideUp 0.4s ease;
+}
+
+.uspesSirkel, .napakaSirkel {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uspesSirkel {
+  background: rgba(0, 232, 150, 0.1);
+  border: 2px solid var(--green);
+  color: var(--green);
+  box-shadow: 0 0 40px rgba(0, 232, 150, 0.2);
+}
+
+.napakaSirkel {
+  background: rgba(255, 61, 90, 0.1);
+  border: 2px solid var(--red);
+  color: var(--red);
+}
+
+.rezultat h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.detajli {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.detajlItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.detajlItem:last-child { border-bottom: none; }
+.detajlItem span { font-size: 13px; color: var(--text2); }
+.detajlItem strong { font-size: 14px; text-align: right; }
+.razdalja { color: var(--green); }
+
+.napakaSporocilo {
+  color: var(--text2);
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 0 8px;
+}
+
+.gumbi {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.btnPrimary {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: #000;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+}
+
+.btnPrimary:active { transform: scale(0.97); }
+
+.btnSecondary {
+  width: 100%;
+  padding: 13px;
+  background: var(--surface);
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btnSecondary:active { transform: scale(0.97); }
