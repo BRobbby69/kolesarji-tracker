@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS registracije (
   lat_ob_skeniranju DOUBLE PRECISION,
   lon_ob_skeniranju DOUBLE PRECISION,
   razdalja_m INTEGER,
-  created_at TIMESTAMPTZ DEFAULT now(),
-  UNIQUE(kolesar_id, cilj_id)  -- vsak kolesar lahko doseže cilj le enkrat
+  created_at TIMESTAMPTZ DEFAULT now()
+  -- UNIQUE omejitev je bila odstranjena - kolesar lahko doseže cilj večkrat
 );
 
 -- Indeksi za hitrejše poizvedbe

@@ -1,0 +1,280 @@
+.page {
+  padding: 20px 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.header p {
+  color: var(--text2);
+  font-size: 13px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.prazno {
+  text-align: center;
+  color: var(--text3);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ciljiBoksi {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ciljiBoksi h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text2);
+  margin: 0;
+}
+
+.ciljiBoksevi {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ciljBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  color: var(--text);
+}
+
+.ciljBtn:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.ciljBtn.active {
+  border-color: var(--primary);
+  background: var(--primary-light, rgba(59, 130, 246, 0.1));
+  font-weight: 600;
+}
+
+.naziv {
+  flex: 1;
+  text-align: left;
+}
+
+.obiskov {
+  color: var(--text2);
+  font-size: 12px;
+  min-width: max-content;
+  margin-left: 10px;
+}
+
+.lestvica {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ciljInfo {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.ciljInfo h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+
+.ciljInfo p {
+  color: var(--text2);
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.coords {
+  display: block;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.praznolestvica {
+  text-align: center;
+  color: var(--text3);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+.lestvicaList {
+  display: flex;
+  flex-direction: column;
+}
+
+.lestvicaHeader {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px 70px;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text2);
+  text-transform: uppercase;
+}
+
+.lestvicaRow {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px 70px;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  align-items: center;
+  font-size: 14px;
+  animation: slideUp 0.3s ease;
+  transition: background 0.2s ease;
+}
+
+.lestvicaRow:hover {
+  background: var(--surface);
+}
+
+.lestvicaRow:last-child {
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.lestvicaRow:nth-child(2) {
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.lestvicaRow:nth-child(3) {
+  background: rgba(192, 192, 192, 0.05);
+}
+
+.lestvicaRow:nth-child(4) {
+  background: rgba(205, 127, 50, 0.05);
+}
+
+.rang {
+  text-align: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 16px;
+}
+
+.rang1 {
+  color: #ffd700;
+}
+
+.rang2 {
+  color: #c0c0c0;
+}
+
+.rang3 {
+  color: #cd7f32;
+}
+
+.kolesar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kolesar strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.ekipa {
+  color: var(--text2);
+  font-size: 12px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stevilo {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.bold {
+  font-weight: 700;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .lestvicaHeader,
+  .lestvicaRow {
+    grid-template-columns: 40px 1fr 50px;
+  }
+
+  .ekipa {
+    display: none;
+  }
+
+  .rang {
+    font-size: 14px;
+  }
+
+  .stevilo {
+    font-size: 14px;
+  }
+}

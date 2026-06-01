@@ -7,6 +7,7 @@ const navItems = [
   { path: '/kolesarji', icon: UsersIcon, label: 'Kolesarji' },
   { path: '/skeniraj', icon: ScanIcon, label: 'Skeniraj', primary: true },
   { path: '/registracije', icon: ListIcon, label: 'Rezultati' },
+  { path: '/statistika', icon: BarChartIcon, label: 'Statistika' },
   { path: '/cilji', icon: FlagIcon, label: 'Cilji' },
 ]
 
@@ -61,6 +62,9 @@ function ScanIcon() {
 }
 function ListIcon() {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+}
+function BarChartIcon() {
+  return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
 }
 function FlagIcon() {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>

@@ -6,6 +6,7 @@ import KoleSarJiForm from './pages/KolesarForm'
 import SkeniranjeCilja from './pages/SkeniranjeCilja'
 import Registracije from './pages/Registracije'
 import Cilji from './pages/Cilji'
+import Statistika from './pages/Statistika'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/kolesarji/:id/uredi" element={<KoleSarJiForm />} />
         <Route path="/skeniraj" element={<SkeniranjeCilja />} />
         <Route path="/registracije" element={<Registracije />} />
+        <Route path="/statistika" element={<Statistika />} />
         <Route path="/cilji" element={<Cilji />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
