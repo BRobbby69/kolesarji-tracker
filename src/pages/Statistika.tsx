@@ -15,7 +15,6 @@ export default function Statistika() {
   const [cilji, setCilji] = useState<Cilj[]>([])
   const [statistika, setStatistika] = useState<Map<string, StatistikaPoKolesarju[]>>(new Map())
   const [loading, setLoading] = useState(true)
-  const [izbaniCilj, setIzbaniCilj] = useState<string | null>(null)
 
   useEffect(() => {
     fetchData()
@@ -24,7 +23,6 @@ export default function Statistika() {
   async function fetchData() {
     setLoading(true)
 
-    // Pridobi vse cilje
     const { data: cilje } = await supabase
       .from('cilji')
       .select('*')
@@ -32,12 +30,8 @@ export default function Statistika() {
 
     if (cilje) {
       setCilji(cilje)
-      if (cilje.length > 0) {
-        setIzbaniCilj(cilje[0].id)
-      }
     }
 
-    // Pridobi statistiko registracij po ciljih
     const { data: registracije } = await supabase
       .from('registracije')
       .select('kolesar_id, cilj_id, kolesarji(ime, priimek, stevilka, ekipa)')
@@ -45,7 +39,6 @@ export default function Statistika() {
     if (registracije) {
       const stats = new Map<string, StatistikaPoKolesarju[]>()
 
-      // Grupiraj registracije po ciljih
       registracije.forEach(reg => {
         const ciljId = reg.cilj_id
         const kolesar = reg.kolesarji as any
@@ -73,7 +66,6 @@ export default function Statistika() {
         }
       })
 
-      // Sortiraj kolesarje po številu obiskov (padajoče)
       stats.forEach(kolesarji => {
         kolesarji.sort((a, b) => b.stevilo_obiskov - a.stevilo_obiskov)
       })
@@ -83,9 +75,6 @@ export default function Statistika() {
 
     setLoading(false)
   }
-
-  const izbaniCiljData = cilji.find(c => c.id === izbaniCilj)
-  const lestvica = izbaniCilj ? statistika.get(izbaniCilj) || [] : []
 
   return (
     <div className={styles.page}>
@@ -100,66 +89,54 @@ export default function Statistika() {
         <div className={styles.prazno}>Ni ciljev</div>
       ) : (
         <div className={styles.container}>
-          <div className={styles.ciljiBoksi}>
-            <h3>Cilji:</h3>
-            <div className={styles.ciljiBoksevi}>
-              {cilji.map(c => (
-                <button
-                  key={c.id}
-                  className={`${styles.ciljBtn} ${izbaniCilj === c.id ? styles.active : ''}`}
-                  onClick={() => setIzbaniCilj(c.id)}
-                >
-                  <span className={styles.naziv}>{c.naziv}</span>
-                  <span className={styles.obiskov}>
-                    {statistika.get(c.id)?.length || 0} kolesarjev
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {izbaniCiljData && (
-            <div className={styles.lestvica}>
-              <div className={styles.ciljInfo}>
-                <h2>{izbaniCiljData.naziv}</h2>
-                {izbaniCiljData.opis && <p>{izbaniCiljData.opis}</p>}
-                <span className={styles.coords}>
-                  📍 {izbaniCiljData.latitude.toFixed(5)}, {izbaniCiljData.longitude.toFixed(5)}
-                </span>
-              </div>
-
-              {lestvica.length === 0 ? (
-                <div className={styles.praznolestvica}>
-                  Ni registracij za ta cilj
-                </div>
-              ) : (
-                <div className={styles.lestvicaList}>
-                  <div className={styles.lestvicaHeader}>
-                    <span className={styles.rang}>Mesto</span>
-                    <span className={styles.kolesar}>Kolesar</span>
-                    <span className={styles.ekipa}>Ekipa</span>
-                    <span className={styles.stevilo}>Obiski</span>
+          {cilji.map(c => {
+            const lestvica = statistika.get(c.id) || []
+            return (
+              <section key={c.id} className={styles.ciljSection}>
+                <div className={styles.ciljInfo}>
+                  <div className={styles.ciljNaslov}>
+                    <h2>{c.naziv}</h2>
+                    <span className={styles.obiskov}>
+                      {lestvica.length} kolesarjev
+                    </span>
                   </div>
-                  {lestvica.map((k, index) => (
-                    <div key={k.kolesar_id} className={styles.lestvicaRow}>
-                      <span className={`${styles.rang} ${styles['rang' + (index + 1)]}`}>
-                        {index + 1}{index === 0 && '🥇'}
-                        {index === 1 && '🥈'}
-                        {index === 2 && '🥉'}
-                      </span>
-                      <span className={styles.kolesar}>
-                        <strong>#{k.stevilka}</strong> {k.ime} {k.priimek}
-                      </span>
-                      <span className={styles.ekipa}>{k.ekipa || '-'}</span>
-                      <span className={`${styles.stevilo} ${styles.bold}`}>
-                        {k.stevilo_obiskov}
-                      </span>
-                    </div>
-                  ))}
+                  {c.opis && <p>{c.opis}</p>}
+                  <span className={styles.coords}>
+                    📍 {c.latitude.toFixed(5)}, {c.longitude.toFixed(5)}
+                  </span>
                 </div>
-              )}
-            </div>
-          )}
+
+                {lestvica.length === 0 ? (
+                  <div className={styles.praznolestvica}>
+                    Ni registracij za ta cilj
+                  </div>
+                ) : (
+                  <div className={styles.lestvicaList}>
+                    <div className={styles.lestvicaHeader}>
+                      <span className={styles.rang}>Mesto</span>
+                      <span className={styles.kolesar}>Kolesar</span>
+                      <span className={styles.ekipa}>Ekipa</span>
+                      <span className={styles.stevilo}>Obiski</span>
+                    </div>
+                    {lestvica.map((k, index) => (
+                      <div key={k.kolesar_id} className={styles.lestvicaRow}>
+                        <span className={`${styles.rang} ${styles['rang' + (index + 1)]}`}>
+                          {index + 1}{index === 0 && ' 🥇'}{index === 1 && ' 🥈'}{index === 2 && ' 🥉'}
+                        </span>
+                        <span className={styles.kolesar}>
+                          <strong>#{k.stevilka}</strong> {k.ime} {k.priimek}
+                        </span>
+                        <span className={styles.ekipa}>{k.ekipa || '-'}</span>
+                        <span className={`${styles.stevilo} ${styles.bold}`}>
+                          {k.stevilo_obiskov}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            )
+          })}
         </div>
       )}
     </div>
