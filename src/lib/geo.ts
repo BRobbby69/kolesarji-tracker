@@ -23,14 +23,37 @@ export function haversineRazdalja(
 export function getCurrentPosition(): Promise<GeolocationPosition> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject(new Error('Geolokacija ni podprta v tem brskalniku'))
+      reject(new Error('Geolokacija ni podprta v tem brskalniku.'))
       return
     }
-    navigator.geolocation.getCurrentPosition(resolve, reject, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    })
+    if (!window.isSecureContext) {
+      reject(new Error('Geolokacija zahteva varno povezavo (HTTPS ali localhost).'))
+      return
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      resolve,
+      (error) => {
+        let message = 'GPS lokalizacija ni uspela.'
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            message = 'Dostop do GPS je zavrnjen. Omogoči lokacijo v nastavitvah brskalnika.'
+            break
+          case error.POSITION_UNAVAILABLE:
+            message = 'GPS ni mogel določiti položaja. Poskusi znova na prostem mestu.'
+            break
+          case error.TIMEOUT:
+            message = 'GPS zahteva več časa. Poskusi znova ali se prepričaj, da ima naprava dostop do signala.'
+            break
+        }
+        reject(new Error(`${message} ${error.message || ''}`.trim()))
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    )
   })
 }
 

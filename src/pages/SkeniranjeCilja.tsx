@@ -98,8 +98,8 @@ export default function SkeniranjeCilja() {
       let position: GeolocationPosition
       try {
         position = await getCurrentPosition()
-      } catch {
-        throw new Error('GPS lokacija ni dostopna. Preverite dovoljenja.')
+      } catch (geoError: any) {
+        throw new Error(geoError?.message || 'GPS lokacija ni dostopna. Preverite dovoljenja in HTTPS.')
       }
 
       // Preveri razdaljo
@@ -135,18 +135,6 @@ export default function SkeniranjeCilja() {
           .single()
         if (ciljeErr) throw new Error('Napaka pri shranjevanju cilja')
         cilj = novCilj
-      }
-
-      // Preveri podvajanje (isti kolesar, isti cilj)
-      const { data: obstojeca } = await supabase
-        .from('registracije')
-        .select('id')
-        .eq('kolesar_id', izbraniKolesar!.id)
-        .eq('cilj_id', qrData.cilj_id)
-        .single()
-
-      if (obstojeca) {
-        throw new Error(`Kolesar ${izbraniKolesar?.ime} je ta cilj že dosegel!`)
       }
 
       // Shrani registracijo
