@@ -94,16 +94,16 @@ export default function Statistika() {
             return (
               <section key={c.id} className={styles.ciljSection}>
                 <div className={styles.ciljInfo}>
-                  <div className={styles.ciljNaslov}>
-                    <h2>{c.naziv}</h2>
+                  <h2>{c.naziv}</h2>
+                  {c.opis && <p>{c.opis}</p>}
+                  <div className={styles.ciljMeta}>
+                    <span className={styles.coords}>
+                      📍 {c.latitude.toFixed(5)}, {c.longitude.toFixed(5)}
+                    </span>
                     <span className={styles.obiskov}>
                       {lestvica.length} kolesarjev
                     </span>
                   </div>
-                  {c.opis && <p>{c.opis}</p>}
-                  <span className={styles.coords}>
-                    📍 {c.latitude.toFixed(5)}, {c.longitude.toFixed(5)}
-                  </span>
                 </div>
 
                 {lestvica.length === 0 ? (
