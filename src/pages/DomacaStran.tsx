@@ -42,7 +42,7 @@ export default function DomacaStran() {
     <div className={styles.page}>
       <div className={styles.hero}>
         <div className={styles.heroText}>
-          <h1>Dobro jutro<span>🚴</span></h1>
+          <h1>Passo di Strojna<span>🚴</span></h1>
           <p>Sledite kolesarjem v realnem času</p>
         </div>
         <div className={styles.heroBadge}>
@@ -89,18 +89,26 @@ export default function DomacaStran() {
       {zadnje.length > 0 && (
         <div className={styles.zadnje}>
           <h2>Zadnje registracije</h2>
-          {zadnje.map(r => (
-            <div key={r.id} className={styles.zaRegItem}>
-              <div className={styles.zaRegNum}>#{r.kolesarji?.stevilka}</div>
-              <div className={styles.zaRegInfo}>
-                <strong>{r.kolesarji?.ime} {r.kolesarji?.priimek}</strong>
-                <span>{r.cilji?.naziv}</span>
+          {zadnje.map(r => {
+            const cas = r.cas ? new Date(r.cas) : null
+            return (
+              <div key={r.id} className={styles.zaRegItem}>
+                <div className={styles.zaRegNum}>#{r.kolesarji?.stevilka}</div>
+                <div className={styles.zaRegInfo}>
+                  <strong>{r.kolesarji?.ime} {r.kolesarji?.priimek}</strong>
+                  <span>{r.cilji?.naziv}</span>
+                </div>
+                <div className={styles.zaRegCas}>
+                  {cas ? (
+                    <>
+                      <div>{cas.toLocaleDateString('sl-SI', { day: '2-digit', month: '2-digit', year: 'numeric' })}</div>
+                      <div>{cas.toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit' })}</div>
+                    </>
+                  ) : '—'}
+                </div>
               </div>
-              <div className={styles.zaRegCas}>
-                {new Date(r.cas).toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit' })}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
     </div>
