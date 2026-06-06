@@ -64,7 +64,7 @@ export default function Registracije() {
                   {new Date(r.cas).toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                 </div>
                 <div className={styles.datum}>
-                  {new Date(r.cas).toLocaleDateString('sl-SI', { day: 'numeric', month: 'short' })}
+                  {`${new Date(r.cas).getDate().toString().padStart(2, '0')}.${(new Date(r.cas).getMonth() + 1).toString().padStart(2, '0')}.${new Date(r.cas).getFullYear()}`}
                 </div>
                 {r.razdalja_m != null && (
                   <div className={styles.razdalja}>{r.razdalja_m}m</div>

@@ -60,10 +60,11 @@
   font-weight: 800;
   font-size: 13px;
   color: var(--accent);
-  min-width: 36px;
+  min-width: 40px;
+  text-align: right;
 }
 
-.info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .info strong {
   font-size: 14px;
   overflow: hidden;
