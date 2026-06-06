@@ -285,11 +285,16 @@
 @media (max-width: 600px) {
   .lestvicaHeader,
   .lestvicaRow {
-    grid-template-columns: 40px 1fr 50px;
+    grid-template-columns: 40px 1fr 70px 50px;
   }
 
   .ekipa {
-    display: none;
+    display: block;
+    font-size: 12px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .rang {
