@@ -94,27 +94,6 @@
 .razdalja { font-size: 11px; color: var(--text3); }
 
 @media (max-width: 600px) {
-  .item {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .itemLeft {
-    width: 100%;
-  }
-
-  .itemRight {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .itemInfo {
-    gap: 6px;
-  }
-
   .list {
     width: 100%;
     margin: 0;
